@@ -3,8 +3,16 @@ import Hash from '@ioc:Adonis/Core/Hash'
 import Usuario from 'App/Models/usuarios_estacionamentos'
 
 Route.get('/', async () => {
-  return { hello: 'world' }
+  return '<BR><BR><BR><CENTER><FONT COLOR="GREEN"><H1>CLUBE CURITIBANO <BR><BR> API ESTACIONAMENTO</FONT></H1></CENTER>'
 })
+
+Route.group(() => {
+  // VEICULO
+  Route.group(() => {
+    // Rota para buscar dados do veículo do associado
+    Route.get(':dias', 'VeiculosController.buscarDadosVeiculo').middleware('auth:web,api')
+  }).prefix('/veiculos')
+}).prefix('/estacionamento')
 
 Route.post('/usuario', async ({ request }) => {
   const { email, password } = request.all()
